@@ -1,3 +1,4 @@
+import { Backdrop, Button, CircularProgress } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import fire from "../fire";
 
@@ -6,8 +7,7 @@ export const authContext = React.createContext();
 const AuthContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState("");
   const [error, setError] = useState("");
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [userGroups, setUserGroups] = useState(false);
+  const [loading, setLoading] = useState(false);
   function signUp(email, password, navigate) {
     fire
       .auth()
@@ -20,7 +20,7 @@ const AuthContextProvider = ({ children }) => {
     fire
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .then(() => navigate("/products"))
+      .then(() => navigate("/my-groups"))
       .catch(err => setError(err.message));
   }
 
@@ -29,25 +29,30 @@ const AuthContextProvider = ({ children }) => {
   }
 
   function authListener() {
+    setLoading(true);
     fire.auth().onAuthStateChanged(user => {
       if (user) {
-        // login: admin@gmail.com password: Ba123123
-        if (user.email === "admin@gmail.com") {
-          setIsAdmin(true);
-        }
         setCurrentUser(user);
       } else {
         setCurrentUser("");
-        setIsAdmin(false);
       }
     });
+    setTimeout(() => {
+      setLoading(false);
+    }, 500);
   }
   useEffect(authListener, []);
-
-  // console.log(currentUser);
+  if (loading) {
+    return (
+      <Backdrop
+        sx={{ color: "#fff", zIndex: theme => theme.zIndex.drawer + 1 }}
+        open={true}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
+    );
+  }
   return (
-    <authContext.Provider
-      value={{ currentUser, error, isAdmin, signUp, login, logOut }}>
+    <authContext.Provider value={{ currentUser, error, signUp, login, logOut }}>
       {children}
     </authContext.Provider>
   );

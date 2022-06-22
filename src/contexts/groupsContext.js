@@ -31,6 +31,7 @@ const GroupsContextProvider = ({ children }) => {
   async function createGroup(groupData, professorData) {
     await axios.post(API + "/groups", groupData);
     await axios.post(API + "/professors", professorData);
+    getGroups();
   }
 
   async function getGroups() {
@@ -41,8 +42,9 @@ const GroupsContextProvider = ({ children }) => {
     });
   }
   //   console.log(state.pages);
-  async function deleteGroup(id) {
-    await axios.delete(`${API}/${id}`);
+  async function deleteGroup(groupId, professorId) {
+    await axios.delete(`${API}/groups/${groupId}`);
+    await axios.delete(`${API}/professors/${professorId}`);
     getGroups();
   }
 
@@ -54,7 +56,7 @@ const GroupsContextProvider = ({ children }) => {
     });
   }
   async function updateGroup(id, editedGroup) {
-    await axios.patch(`${API}/${id}`, editedGroup);
+    await axios.patch(`${API}/groups/${id}`, editedGroup);
   }
   return (
     <groupsContext.Provider

@@ -23,8 +23,8 @@ const Register = () => {
       alignItems={"center"}
       justifyContent={"center"}
       height={"70vh"}>
-      <Typography variant="h3" component="h2">
-        Register
+      <Typography variant="h4" component="h2">
+        Регистрация
       </Typography>
       {error ? <Alert severity="error">{error}</Alert> : null}
 
@@ -32,7 +32,6 @@ const Register = () => {
         value={email}
         onChange={e => setEmail(e.target.value)}
         style={{ width: "40%", margin: "10px" }}
-        id="outlined-basic"
         label="Email"
         variant="outlined"
       />
@@ -40,18 +39,18 @@ const Register = () => {
         value={password}
         onChange={e => setPassword(e.target.value)}
         style={{ width: "40%", margin: "10px" }}
-        id="outlined-basic"
-        label="Password"
+        label="Пароль"
         variant="outlined"
+        type={"password"}
       />
       <Button
         variant="contained"
         style={{ width: "40%", margin: "10px" }}
         onClick={handleValues}>
-        Register
+        Зарегистроваться
       </Button>
       <Typography variant="p" component="h2">
-        Already have an account?
+        Уже есть аккаунт?
       </Typography>
       <Typography
         onClick={() => navigate("/login")}
@@ -59,7 +58,7 @@ const Register = () => {
         color={"primary"}
         style={{ cursor: "pointer" }}
         component="h2">
-        Log in
+        Войти
       </Typography>
     </Box>
   );

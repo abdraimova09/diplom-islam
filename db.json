@@ -17,6 +17,24 @@
         "groupName": "js21"
       },
       "id": 2
+    },
+    {
+      "username": "admin@gmail.com",
+      "group": {
+        "id": 1655926753979,
+        "subjectName": "frontend",
+        "groupName": "js 10"
+      },
+      "id": 3
+    },
+    {
+      "username": "admin@gmail.com",
+      "group": {
+        "id": 1655926761730,
+        "subjectName": "frontend",
+        "groupName": "js 10"
+      },
+      "id": 4
     }
   ],
   "groups": [
@@ -25,7 +43,8 @@
       "groupName": "js ev 9",
       "pastLessons": [
         "Урок-1",
-        "Урок-2"
+        "Урок-2",
+        "HTML"
       ],
       "subjectName": "frontend",
       "students": [
@@ -33,14 +52,19 @@
           "studentName": "Daniil Pakalov",
           "progress": [
             {
-              "lesson": 1,
+              "lesson": "Урок-1",
               "present": true,
               "mark": "5"
             },
             {
-              "lesson": 2,
+              "lesson": "Урок-2",
               "present": false,
               "mark": ""
+            },
+            {
+              "lesson": "HTML",
+              "present": true,
+              "mark": 2
             }
           ]
         }
@@ -49,18 +73,86 @@
     {
       "groupName": "js21",
       "subjectName": "backend",
-      "pastLessons": [],
+      "pastLessons": [
+        "Context",
+        "Axios",
+        "Router-dom"
+      ],
       "students": [
         {
           "studentName": "Begimay",
-          "progress": []
+          "progress": [
+            {
+              "lesson": "",
+              "present": true,
+              "mark": 2
+            },
+            {
+              "lesson": "Axios",
+              "present": true,
+              "mark": 1
+            },
+            {
+              "lesson": "Router-dom",
+              "present": true,
+              "mark": 5
+            }
+          ]
         },
         {
           "studentName": " Elberat",
-          "progress": []
+          "progress": [
+            {
+              "lesson": "",
+              "present": false,
+              "mark": null
+            },
+            {
+              "lesson": "Axios",
+              "present": false,
+              "mark": null
+            },
+            {
+              "lesson": "Router-dom",
+              "present": true,
+              "mark": 5
+            }
+          ]
         }
       ],
       "id": 1655852738193
+    },
+    {
+      "groupName": "js 10",
+      "subjectName": "frontend",
+      "pastLessons": [],
+      "students": [
+        {
+          "studentName": "Bera",
+          "progress": []
+        },
+        {
+          "studentName": " Begy",
+          "progress": []
+        }
+      ],
+      "id": 1655926753979
+    },
+    {
+      "groupName": "js 10",
+      "subjectName": "frontend",
+      "pastLessons": [],
+      "students": [
+        {
+          "studentName": "Bera",
+          "progress": []
+        },
+        {
+          "studentName": " Begy",
+          "progress": []
+        }
+      ],
+      "id": 1655926761730
     }
   ]
 }

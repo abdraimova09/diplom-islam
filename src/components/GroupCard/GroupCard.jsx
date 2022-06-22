@@ -6,9 +6,11 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
+import { groupsContext } from "../../contexts/groupsContext";
 
 export default function GroupCard({ item }) {
   const navigate = useNavigate();
+  const { deleteGroup } = React.useContext(groupsContext);
   return (
     <Card sx={{ minWidth: 275 }}>
       <CardContent>
@@ -24,6 +26,18 @@ export default function GroupCard({ item }) {
           onClick={() => navigate(`/my-groups/${item.group.id}`)}
           size="small">
           Подробнее
+        </Button>
+        <Button
+          onClick={() => {
+            // eslint-disable-next-line no-restricted-globals
+            if (confirm("Удалить группу?")) {
+              deleteGroup(item.group.id, item.id);
+            } else {
+              alert("Вы отменили действие");
+            }
+          }}
+          size="small">
+          Удалить
         </Button>
       </CardActions>
     </Card>

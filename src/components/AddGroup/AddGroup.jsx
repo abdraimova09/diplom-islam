@@ -1,22 +1,25 @@
 import { Box, Button, Container, TextField, Typography } from "@mui/material";
 import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { authContext } from "../../contexts/authContext";
 import { groupsContext } from "../../contexts/groupsContext";
 
 const AddGroup = () => {
   const { createGroup } = useContext(groupsContext);
+  const { currentUser } = useContext(authContext);
+  const navigate = useNavigate();
   const [groupName, setGroupName] = useState("");
   const [subjectName, setSubjectName] = useState("");
   const [students, setStudents] = useState("");
-  const [username, setUsername] = useState("");
   function handleSave() {
-    if (
-      !groupName.trim() ||
-      !subjectName.trim() ||
-      !students.trim() ||
-      !username.trim()
-    ) {
+    if (!groupName.trim() || !subjectName.trim() || !students.trim()) {
       alert("Заполните поля!");
     } else {
+      // eslint-disable-next-line no-restricted-globals
+      if (!confirm("Создать новую группу?")) {
+        alert("Вы отменили действие");
+        return;
+      }
       const id = Date.now();
       const groupData = {
         groupName,
@@ -28,7 +31,7 @@ const AddGroup = () => {
         id,
       };
       const professorData = {
-        username,
+        username: currentUser.email,
         group: {
           id,
           subjectName,
@@ -36,6 +39,7 @@ const AddGroup = () => {
         },
       };
       createGroup(groupData, professorData);
+      navigate("/my-groups");
     }
   }
   return (
@@ -51,29 +55,23 @@ const AddGroup = () => {
         <TextField
           value={groupName}
           onChange={e => setGroupName(e.target.value)}
-          label="Group name"
+          label="Название группы"
           variant="outlined"
         />
         <TextField
           value={subjectName}
           onChange={e => setSubjectName(e.target.value)}
-          label="Subject"
-          variant="outlined"
-        />
-        <TextField
-          value={username}
-          onChange={e => setUsername(e.target.value)}
-          label="Professor's email"
+          label="Предмет"
           variant="outlined"
         />
         <TextField
           value={students}
           onChange={e => setStudents(e.target.value)}
-          label="Students"
+          label="Студенты (перечислять через запятую)"
           variant="outlined"
         />
         <Button onClick={handleSave} variant="contained">
-          Save
+          Добавить
         </Button>
       </Box>
     </Container>

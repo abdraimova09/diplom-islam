@@ -28,9 +28,13 @@ const MyGroups = () => {
         Мои группы
       </Typography>
       <Box marginTop={"50px"}>
-        {groups.map(item => (
-          <GroupCard key={item.id} item={item} />
-        ))}
+        {groups.length ? (
+          groups.map(item => <GroupCard key={item.id} item={item} />)
+        ) : (
+          <Typography textAlign={"center"} variant="h6">
+            Групп нет
+          </Typography>
+        )}
       </Box>
     </Container>
   );

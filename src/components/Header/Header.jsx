@@ -21,7 +21,7 @@ const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const pages = [
-    { title: "Мои группы", route: "/my-groups" },
+    { title: "Мои группы", route: `/my-groups${window.location.search}` },
     { title: "Добавить группу", route: "/add-group" },
   ];
   const settings = [];
@@ -88,16 +88,18 @@ const Header = () => {
               sx={{
                 display: { xs: "block", md: "none" },
               }}>
-              {pages.map(page => (
-                <MenuItem
-                  key={page.title}
-                  onClick={() => {
-                    handleCloseNavMenu();
-                    navigate(page.route);
-                  }}>
-                  <Typography textAlign="center">{page.title}</Typography>
-                </MenuItem>
-              ))}
+              {currentUser
+                ? pages.map(page => (
+                    <MenuItem
+                      key={page.title}
+                      onClick={() => {
+                        handleCloseNavMenu();
+                        navigate(page.route);
+                      }}>
+                      <Typography textAlign="center">{page.title}</Typography>
+                    </MenuItem>
+                  ))
+                : null}
             </Menu>
           </Box>
           <Typography
@@ -118,23 +120,25 @@ const Header = () => {
             КГТУ
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map(page => (
-              <Button
-                key={page.title}
-                sx={{ my: 2, color: "white", display: "block" }}
-                onClick={() => {
-                  handleCloseNavMenu();
-                  navigate(page.route);
-                }}>
-                {page.title}
-              </Button>
-            ))}
+            {currentUser
+              ? pages.map(page => (
+                  <Button
+                    key={page.title}
+                    sx={{ my: 2, color: "white", display: "block" }}
+                    onClick={() => {
+                      handleCloseNavMenu();
+                      navigate(page.route);
+                    }}>
+                    {page.title}
+                  </Button>
+                ))
+              : null}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="U" src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
             <Menu

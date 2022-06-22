@@ -1,10 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Alert, Box, Button, TextField, Typography } from "@mui/material";
 import { authContext } from "../../contexts/authContext";
 import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
-  const { login, error } = useContext(authContext);
+  const { login, error, currentUser } = useContext(authContext);
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -30,7 +30,6 @@ const LoginForm = () => {
         value={email}
         onChange={e => setEmail(e.target.value)}
         style={{ width: "40%", margin: "10px" }}
-        id="outlined-basic"
         label="Email"
         variant="outlined"
       />
@@ -38,18 +37,18 @@ const LoginForm = () => {
         value={password}
         onChange={e => setPassword(e.target.value)}
         style={{ width: "40%", margin: "10px" }}
-        id="outlined-basic"
-        label="Password"
+        label="Пароль"
         variant="outlined"
+        type="password"
       />
       <Button
         variant="contained"
         style={{ width: "40%", margin: "10px" }}
         onClick={handleValues}>
-        Login
+        Логин
       </Button>
       <Typography variant="p" component="h2">
-        Don't have an account?
+        Еще нет аккаунта?
       </Typography>
       <Typography
         onClick={() => navigate("/register")}
@@ -57,7 +56,7 @@ const LoginForm = () => {
         color={"primary"}
         style={{ cursor: "pointer" }}
         component="h2">
-        Sign up
+        Зарегистрироваться
       </Typography>
     </Box>
   );

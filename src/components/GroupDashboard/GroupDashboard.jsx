@@ -11,16 +11,16 @@ import {
   Button,
 } from "@mui/material";
 import React, { useContext, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { groupsContext } from "../../contexts/groupsContext";
 
 const GroupDashboard = () => {
   const params = useParams();
+  const navigate = useNavigate();
   const { getOneGroup, oneGroup } = useContext(groupsContext);
   useEffect(() => {
-    getOneGroup(params.id, params.subject);
+    getOneGroup(params.id);
   }, []);
-  console.log(oneGroup);
   return (
     <Container>
       {oneGroup ? (
@@ -53,7 +53,11 @@ const GroupDashboard = () => {
                     </TableCell>
                     {row.progress.map(item => (
                       <TableCell key={item.mark} align="right">
-                        {!item.present ? "нб" : item.mark}
+                        {!item.present
+                          ? "нб"
+                          : item.mark === 0
+                          ? "Нет оценки"
+                          : item.mark}
                       </TableCell>
                     ))}
                   </TableRow>
@@ -61,7 +65,10 @@ const GroupDashboard = () => {
               </TableBody>
             </Table>
           </TableContainer>
-          <Button style={{ marginTop: "10px" }} variant="contained">
+          <Button
+            onClick={() => navigate(`/my-groups/${params.id}/add-lesson`)}
+            style={{ marginTop: "10px" }}
+            variant="contained">
             Добавить урок и выставить оценки
           </Button>
         </>
