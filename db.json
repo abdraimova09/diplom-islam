@@ -1,0 +1,66 @@
+{
+  "professors": [
+    {
+      "username": "admin@gmail.com",
+      "group": {
+        "id": 1,
+        "subjectName": "frontend",
+        "groupName": "js ev 9"
+      },
+      "id": 1
+    },
+    {
+      "username": "admin@gmail.com",
+      "group": {
+        "id": 1655852738193,
+        "subjectName": "backend",
+        "groupName": "js21"
+      },
+      "id": 2
+    }
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "groupName": "js ev 9",
+      "pastLessons": [
+        "Урок-1",
+        "Урок-2"
+      ],
+      "subjectName": "frontend",
+      "students": [
+        {
+          "studentName": "Daniil Pakalov",
+          "progress": [
+            {
+              "lesson": 1,
+              "present": true,
+              "mark": "5"
+            },
+            {
+              "lesson": 2,
+              "present": false,
+              "mark": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "groupName": "js21",
+      "subjectName": "backend",
+      "pastLessons": [],
+      "students": [
+        {
+          "studentName": "Begimay",
+          "progress": []
+        },
+        {
+          "studentName": " Elberat",
+          "progress": []
+        }
+      ],
+      "id": 1655852738193
+    }
+  ]
+}
